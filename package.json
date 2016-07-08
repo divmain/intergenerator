@@ -1,0 +1,19 @@
+{
+  "name": "intergenerator",
+  "version": "0.1.0",
+  "description": "",
+  "main": "lib/index.js",
+  "author": "\"Dale Bustad\" <\"dale@divmain.com\">",
+  "license": "MIT",
+  "dependencies": {
+    "neon-cli": "^0.1.7",
+    "source-map": "^0.5.6"
+  },
+  "scripts": {
+    "install": "neon build"
+  },
+  "devDependencies": {
+    "babylon": "^6.8.4",
+    "lodash": "^4.13.1"
+  }
+}

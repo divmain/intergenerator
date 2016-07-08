@@ -1,0 +1,12 @@
+[package]
+name = "intergenerator"
+version = "0.1.0"
+authors = ["\"Dale Bustad\" <\"dale@divmain.com\">"]
+license = "MIT"
+
+[lib]
+name = "intergenerator"
+crate-type = ["dylib"]
+
+[dependencies]
+neon = "0.1"

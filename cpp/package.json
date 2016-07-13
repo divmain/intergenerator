@@ -1,0 +1,17 @@
+{
+  "name": "async_work",
+  "version": "0.0.0",
+  "description": "Node.js Addons Example #9",
+  "main": "addon.js",
+  "private": true,
+  "gypfile": true,
+  "dependencies": {
+    "babel-generator": "^6.11.0",
+    "babylon": "^6.8.4",
+    "bson": "^0.5.2",
+    "lodash": "^4.13.1",
+    "nan": "*",
+    "nan-check": "0.0.6",
+    "nan-marshal": "0.0.5"
+  }
+}

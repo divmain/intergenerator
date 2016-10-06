@@ -1,7 +1,8 @@
 const babylon = require("babylon");
 const sourceMap = require("source-map");
 
-const generate = require("..");
+const generate = require("../js");
+// const generate = require("../native");
 
 
 const example = `

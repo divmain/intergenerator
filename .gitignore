@@ -3,3 +3,5 @@ native/index.node
 **/*~
 **/node_modules
 **/.DS_Store
+
+/native/Cargo.lock

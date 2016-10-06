@@ -1,3 +1,4 @@
+// callee(...arguments)
 exports.CallExpression = function genCallExpression (node, generator) {
   generator.generate(node.callee);
   generator.advance("(");
@@ -10,6 +11,7 @@ exports.CallExpression = function genCallExpression (node, generator) {
   generator.advance(")");
 };
 
+// object.property
 exports.MemberExpression = function genMemberExpr (node, generator) {
   generator.generate(node.object);
   if (node.property.type === "Identifier") {

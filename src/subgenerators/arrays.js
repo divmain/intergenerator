@@ -1,3 +1,4 @@
+// [...elements]
 exports.ArrayExpression = function genArrayExpr (node, generator) {
   generator.advance("[");
   node.elements.forEach((elementNode, idx) => {

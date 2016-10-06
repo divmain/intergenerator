@@ -1,3 +1,4 @@
+// var ...declarations;
 exports.VariableDeclaration = function genVariableDeclaration (node, generator) {
   generator.advance(`${node.kind} `);
 
@@ -9,7 +10,7 @@ exports.VariableDeclaration = function genVariableDeclaration (node, generator) 
   generator.advance(";");
 };
 
-
+// id = init
 exports.VariableDeclarator = function genVariableDeclarator (node, generator) {
   generator.generate(node.id);
   generator.advance("=");

@@ -1,3 +1,4 @@
+// function id (...params) { body }
 exports.FunctionDeclaration = function genFuncDeclaration (node, generator) {
   const paramNodes = node.params;
 

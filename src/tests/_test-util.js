@@ -14,3 +14,9 @@ exports.generate = source => {
   const { code, map } = g;
   return { code, map: JSON.parse(map) };
 };
+
+exports.dedent = (by, str) => str
+  .split("\n")
+  .filter(line => line.length >= by)
+  .map(line => line.slice(by))
+  .join("\n");

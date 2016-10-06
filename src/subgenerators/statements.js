@@ -1,6 +1,8 @@
 exports.BlockStatement = function genBlockStatement (node, generator) {
   generator.advance("{");
-  generator.generate(node.body);
+  node.body.forEach(bodyNode => {
+  	generator.generate(bodyNode);
+  });
   generator.advance("}");
 };
 

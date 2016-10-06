@@ -10,7 +10,6 @@ exports.FunctionDeclaration = function genFuncDeclaration (node, generator) {
     generator.generate(paramNode);
   });
 
-  generator.advance("){");
+  generator.advance(")");
   generator.generate(node.body);
-  generator.advance("}");
 };

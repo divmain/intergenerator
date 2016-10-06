@@ -1,8 +1,7 @@
 const babylon = require("babylon");
 const sourceMap = require("source-map");
 
-const generate = require("../js");
-// const generate = require("../native");
+const { Generator } = require("../src");
 
 
 const example = `
@@ -14,15 +13,10 @@ console.log(myVariable);
 
 const ast = babylon.parse(example, { sourceFilename: "example.js" });
 
-const { code, mappings, position: length } = generate(ast.program, 0);
-
-const map = new sourceMap.SourceMapGenerator({
-  file: "example.bundle.js",
-  sourceRoot: "/"
-});
-map.setSourceContent("example.js", example);
-
-mappings.forEach(map.addMapping.bind(map));
+const g = new Generator({ outputFilename: "example.bundle.js" });
+g.addSourceFile("example.js", example);
+g.generate(ast.program);
+const { code, map } = g;
 
 console.log("***** CODE *****");
 console.log(code);

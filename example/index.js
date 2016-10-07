@@ -3,18 +3,13 @@ const sourceMap = require("source-map");
 
 const { Generator } = require("../src");
 
+const fs = require("fs");
+const lodashSrc = fs.readFileSync(require.resolve("lodash/lodash.min"), "utf8");
 
-const example = `
-var myVariable = "thing";
-var other = 5;
-var final = null;
-console.log(myVariable);
-`;
+const ast = babylon.parse(lodashSrc, { sourceFilename: "lodash.min.js" });
 
-const ast = babylon.parse(example, { sourceFilename: "example.js" });
-
-const g = new Generator({ outputFilename: "example.bundle.js" });
-g.addSourceFile("example.js", example);
+const g = new Generator({ outputFilename: "lodash.bundle.js" });
+g.addSourceFile("lodash.min.js", lodashSrc);
 g.generate(ast.program);
 const { code, map } = g;
 

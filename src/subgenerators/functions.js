@@ -1,5 +1,5 @@
 // function id (...params) { body }
-exports.FunctionDeclaration = function genFuncDeclaration (node, generator) {
+exports.FunctionDeclaration = (node, generator) => {
   generator.advance("function ");
   generator.generate(node.id);
   generator.advance("(");

@@ -1,3 +1,3 @@
-exports.Identifier = function genIdentifier (node, generator) {
+exports.Identifier = (node, generator) => {
   generator.advance(node.name, node.loc);
 };

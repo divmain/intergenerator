@@ -1,5 +1,5 @@
 // var ...declarations;
-exports.VariableDeclaration = function genVariableDeclaration (node, generator) {
+exports.VariableDeclaration = (node, generator) => {
   generator.advance(`${node.kind} `);
 
   node.declarations.forEach((declaration, idx) => {
@@ -11,7 +11,7 @@ exports.VariableDeclaration = function genVariableDeclaration (node, generator) 
 };
 
 // id = init
-exports.VariableDeclarator = function genVariableDeclarator (node, generator) {
+exports.VariableDeclarator = (node, generator) => {
   generator.generate(node.id);
   generator.advance("=");
   generator.generate(node.init);

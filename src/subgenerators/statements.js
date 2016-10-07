@@ -1,5 +1,5 @@
 // { body }
-exports.BlockStatement = function genBlockStatement (node, generator) {
+exports.BlockStatement = (node, generator) => {
   generator.advance("{");
   node.body.forEach(bodyNode => {
   	generator.generate(bodyNode);
@@ -8,13 +8,13 @@ exports.BlockStatement = function genBlockStatement (node, generator) {
 };
 
 // expression;
-exports.ExpressionStatement = function genExprStmt (node, generator) {
+exports.ExpressionStatement = (node, generator) => {
   generator.generate(node.expression);
   generator.advance(";");
 };
 
 // return argument;
-exports.ReturnStatement = function genReturnStatement (node, generator) {
+exports.ReturnStatement = (node, generator) => {
   generator.advance("return ");
   generator.generate(node.argument);
   generator.advance(";");

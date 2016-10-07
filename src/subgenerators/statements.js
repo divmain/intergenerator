@@ -19,3 +19,8 @@ exports.ReturnStatement = function genReturnStatement (node, generator) {
   generator.generate(node.argument);
   generator.advance(";");
 };
+
+// ;
+exports.EmptyStatement = (node, generator) => {
+  generator.advance(";");
+};

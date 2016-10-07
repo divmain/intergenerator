@@ -4,3 +4,7 @@ exports.Program = function genStringLiteral (node, generator) {
     generator.generate(bodyNode);
   });
 };
+
+exports.File = function getFile (node, generator) {
+  generator.generate(node.program);
+};

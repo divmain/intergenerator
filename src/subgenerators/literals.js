@@ -16,3 +16,7 @@ exports.NullLiteral = (node, generator) => {
 exports.BooleanLiteral = (node, generator) => {
   generator.advance(node.value ? "true" : "false");
 };
+
+exports.ThisExpression = (node, generator) => {
+  generator.advance("this");
+};

@@ -9,6 +9,7 @@ module.exports = Object.assign(
   require("./literals"),
   require("./loops"),
   require("./meta"),
+  require("./objects"),
   require("./statements"),
   require("./variables")
 );

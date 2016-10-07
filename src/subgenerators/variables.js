@@ -13,6 +13,8 @@ exports.VariableDeclaration = (node, generator) => {
 // id = init
 exports.VariableDeclarator = (node, generator) => {
   generator.generate(node.id);
-  generator.advance("=");
-  generator.generate(node.init);
+  if (node.init) {
+    generator.advance("=");
+    generator.generate(node.init);
+  }
 };

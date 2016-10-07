@@ -20,3 +20,7 @@ exports.BooleanLiteral = (node, generator) => {
 exports.ThisExpression = (node, generator) => {
   generator.advance("this");
 };
+
+exports.RegExpLiteral = (node, generator) => {
+  generator.advance(`/${node.pattern}/${node.flags}`);
+};

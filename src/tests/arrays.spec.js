@@ -1,9 +1,10 @@
 const { generate } = require("./_test-util");
 
 test("ArrayExpression", () => {
-  const src = `[thing, null, null]`;
-  let { code, map } = generate(src);
+  const src = `[thing,null,null]`;
 
-  expect(code).toBe("[thing,null,null];");
+  let { map, astIsEqual } = generate(src, true);
+
+  expect(astIsEqual()).toBe.true;
   expect(map.mappings).toBe("EAAC");
 });

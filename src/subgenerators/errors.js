@@ -14,3 +14,9 @@ exports.CatchClause = (node, generator) => {
   // node.body will always be a BlockStatement
   generator.generate(node.body);
 };
+
+// throw expression
+exports.ThrowStatement = (node, generator) => {
+  generator.advance("throw ");
+  generator.generate(node.argument);
+};

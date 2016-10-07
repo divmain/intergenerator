@@ -5,6 +5,6 @@ test("ArrayExpression", () => {
 
   let { map, astIsEqual } = generate(src, true);
 
-  expect(astIsEqual()).toBe.true;
+  expect(astIsEqual()).toBeTruthy();
   expect(map.mappings).toBe("EAAC");
 });

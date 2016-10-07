@@ -32,11 +32,11 @@ exports.generate = (source, singleExpression = false) => {
 
   const ast = getAst(source);
 
-  const g = new Generator({ outputFilename: OUTPUT_FILE });
-  g.addSourceFile(INPUT_FILE, source);
-  g.generate(ast);
+  const generator = new Generator({ outputFilename: OUTPUT_FILE });
+  generator.addSourceFile(INPUT_FILE, source);
+  generator.generate(ast);
 
-  const { code, map } = g;
+  const { code, map } = generator;
 
   const astIsEqual = () => {
     const astFromGeneratedCode = getAst(code);

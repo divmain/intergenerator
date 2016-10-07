@@ -76,3 +76,11 @@ exports.UpdateExpression = (node, generator) => {
   generator.generate(node.argument);
   if (!node.prefix) { generator.advance(node.operator); }
 };
+
+// left || right
+// && | ||
+exports.LogicalExpression = (node, generator) => {
+  generator.generate(node.left);
+  generator.advance(node.operator);
+  generator.generate(node.right);
+};

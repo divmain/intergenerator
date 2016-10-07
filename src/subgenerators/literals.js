@@ -13,3 +13,6 @@ exports.NullLiteral = (node, generator) => {
   generator.advance("null");
 };
 
+exports.BooleanLiteral = (node, generator) => {
+  generator.advance(node.value ? "true" : "false");
+};

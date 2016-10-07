@@ -90,3 +90,14 @@ exports.AssignmentExpression = (node, generator) => {
   generator.generate(node.right);
 };
 
+// new callee( ...arguments )
+exports.NewExpression = (node, generator) => {
+  generator.advance("new ");
+  generator.generate(node.callee);
+  generator.advance("(");
+  node.arguments.forEach((argumentNode, idx) => {
+    if (idx !== 0) { generator.advance(","); }
+    generator.generate(argumentNode);
+  });
+  generator.advance(")");
+};

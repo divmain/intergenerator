@@ -3,10 +3,12 @@ const fs = require("fs");
 const babylon = require("babylon");
 const babelGenerator = require("babel-generator").default;
 
+const t = require("./text");
 const { Generator } = require("../src");
 
 
-const lodashSrc = fs.readFileSync(require.resolve("lodash/lodash.min"), "utf8");
+const lodashSrcPath = require.resolve("lodash/lodash.min");
+const lodashSrc = fs.readFileSync(lodashSrcPath, "utf8");
 const ast = babylon.parse(lodashSrc, { sourceFilename: "lodash.min.js" });
 
 
@@ -42,33 +44,52 @@ const intergeneratorRun = () => {
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+const getTime = () => {
+  const time = process.hrtime();
+  return time[0] * 1e3 + time[1] / 1e6;
+};
+
 const loop = (fn, iterations) => {
   for (let i = 0; i < iterations; i++) {
     fn();
   }
 };
 
-const executeRun = (type, fn, iterations) => {
-  const label = `${type} (${iterations} iterations)`;
-  console.time(label);
-  loop(fn, iterations);
-  console.timeEnd(label);
-};
+const executeRun = (iterations) => {
+  console.log(`===== ${t(`${iterations} iterations`).color(t.yellow)} =====\n`);
 
-console.log("Warming up the JIT...");
-loop(babelRun, 5);
-loop(intergeneratorRun, 5);
+  process.stdout.write("  babel-generator: ");
+  const babelStart = getTime();
+  loop(babelRun, iterations);
+  const babelEnd = getTime();
+  const babelElapsed = Math.floor(babelEnd - babelStart);
+  console.log(`${babelElapsed} milliseconds`);
+
+  process.stdout.write("  intergenerator: ");
+  const intergStart = getTime();
+  loop(intergeneratorRun, iterations);
+  const intergEnd = getTime();
+  const intergElapsed = Math.floor(intergEnd - intergStart);
+  process.stdout.write(`${intergElapsed} milliseconds`);
+
+  const ratio = Math.floor(100 * babelElapsed / intergElapsed) / 100;
+  console.log(` (${t(`${ratio}x faster`).color(t.green)})`);
+  console.log("");
+};
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
+
+console.log("\nWarming up the JIT...");
+console.log(`File: ${lodashSrcPath}\n`);
+loop(babelRun, 5);
+loop(intergeneratorRun, 5);
+
 console.log("Running performance tests...\n");
 
-executeRun("Babel", babelRun, 10);
-executeRun("Babel", babelRun, 50);
-executeRun("Babel", babelRun, 200);
-
-executeRun("Intergenerator", intergeneratorRun, 10);
-executeRun("Intergenerator", intergeneratorRun, 50);
-executeRun("Intergenerator", intergeneratorRun, 200);
+executeRun(10);
+executeRun(50);
+executeRun(200);
+executeRun(500);

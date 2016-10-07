@@ -26,12 +26,10 @@ exports.MemberExpression = (node, generator) => {
 
 // a,b,c
 exports.SequenceExpression = (node, generator) => {
-  if (node.extra && node.extra.parenthesized) { generator.advance("("); }
   node.expressions.forEach((expressionNode, idx) => {
     if (idx !== 0) { generator.advance(","); }
     generator.generate(expressionNode);
   });
-  if (node.extra && node.extra.parenthesized) { generator.advance(")"); }
 };
 
 // +argument (operator followed by argument)

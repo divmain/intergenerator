@@ -44,7 +44,10 @@ exports.Generator = class Generator {
     if (!subgenerator) {
       throw new Error(`Unknown node type detected: "${node.type}"`);
     }
+
+    if (node.extra && node.extra.parenthesized) { this.advance("("); }
     subgenerator(node, this);
+    if (node.extra && node.extra.parenthesized) { this.advance(")"); }
   }
 
   advance (codeSegment, loc, multiline = false) {

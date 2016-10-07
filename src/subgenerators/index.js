@@ -2,6 +2,7 @@ module.exports = Object.assign(
   {},
   require("./arrays"),
   require("./conditionals"),
+  require("./errors"),
   require("./expressions"),
   require("./functions"),
   require("./identifiers"),

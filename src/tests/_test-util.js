@@ -38,18 +38,18 @@ exports.generate = (source, singleExpression = false) => {
 
   const { code, map } = generator;
 
-  const astIsEqual = () => {
+  const assertAstIsEqual = () => {
     const astFromGeneratedCode = getAst(code);
     const astStrA = JSON.stringify(ast);
     const astStrB = JSON.stringify(astFromGeneratedCode);
-    return astStrA === astStrB;
+    expect(astStrA).toEqual(astStrB);
   };
 
   return {
     map: JSON.parse(map),
     code,
     ast,
-    astIsEqual 
+    assertAstIsEqual 
   };
 };
 

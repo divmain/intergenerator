@@ -3,8 +3,8 @@ const { generate, dedent } = require("./_test-util");
 test("ReturnStatement", () => {
   const src = "return a;";
 
-  let { code, map } = generate(src);
+  let { map, assertAstIsEqual } = generate(src);
 
-  expect(code).toBe("return a;");
+  assertAstIsEqual();
   expect(map.mappings).toBe("QAAO");
 });

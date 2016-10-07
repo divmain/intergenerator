@@ -3,8 +3,8 @@ const { generate, dedent } = require("./_test-util");
 test("FunctionDeclaration", () => {
   const src = `function myFunc(a,b,c){a;}`;
 
-  let { code, map, astIsEqual } = generate(src);
+  let { code, map, assertAstIsEqual } = generate(src);
 
-  expect(astIsEqual()).toBeTruthy();
+  assertAstIsEqual();
   expect(map.mappings).toBe("UAAS,OAAO,EAAE,EAAE,GAAG");
 });

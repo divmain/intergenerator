@@ -1,6 +1,6 @@
 const babylon = require("babylon");
 
-const { Generator } = require("..");
+const { Generator } = require("../src");
 
 
 const INPUT_FILE = "example.js";

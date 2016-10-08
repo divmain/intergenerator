@@ -10,7 +10,7 @@
   },
   "scripts": {
     "check": "npm run lint && npm run test",
-    "lint": "eslint --ext .js ./src",
+    "lint": "eslint --ext .js .",
     "test": "jest"
   },
   "devDependencies": {

@@ -1,6 +1,3 @@
-const { partial } = require("lodash");
-
-
 class Text {
   constructor (text) {
     if (typeof text === "undefined") {

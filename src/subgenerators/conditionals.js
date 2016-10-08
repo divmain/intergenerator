@@ -2,11 +2,11 @@
 exports.IfStatement = (node, generator) => {
   generator.advance("if(");
   generator.generate(node.test);
-  generator.advance(")")
+  generator.advance(")");
   generator.generate(node.consequent);
 
   if (node.alternate) {
-    generator.advance("else")
+    generator.advance("else");
     generator.generate(node.alternate);
   }
 };
@@ -20,7 +20,7 @@ exports.ConditionalExpression = (node, generator) => {
   generator.generate(node.alternate);
 };
 
-// switch (condition) { ...cases } ; 
+// switch (condition) { ...cases } ;
 exports.SwitchStatement = (node, generator) => {
   generator.advance("switch(");
   generator.generate(node.discriminant);

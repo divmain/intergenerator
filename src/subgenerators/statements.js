@@ -2,7 +2,7 @@
 exports.BlockStatement = (node, generator) => {
   generator.advance("{");
   node.body.forEach(bodyNode => {
-  	generator.generate(bodyNode);
+    generator.generate(bodyNode);
   });
   generator.advance("}");
 };

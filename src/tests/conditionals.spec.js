@@ -1,18 +1,18 @@
 const { generate } = require("./_test-util");
 
 test("IfStatement", () => {
-  const src = `if(a){b;}`;
+  const src = "if(a){b;}";
 
-  let { map, assertAstIsEqual } = generate(src);
+  const { map, assertAstIsEqual } = generate(src);
 
   assertAstIsEqual();
   expect(map.mappings).toBe("IAAG,GAAG");
 });
 
 test("IfStatement w/ else", () => {
-  const src = `if(a){b;}else{c;}`;
+  const src = "if(a){b;}else{c;}";
 
-  let { map, assertAstIsEqual } = generate(src);
+  const { map, assertAstIsEqual } = generate(src);
 
   assertAstIsEqual();
   expect(map.mappings).toBe("IAAG,GAAG,QAAQ");
@@ -20,9 +20,9 @@ test("IfStatement w/ else", () => {
 
 
 test("ConditionalExpression", () => {
-  const src = `a?b:c`;
+  const src = "a?b:c";
 
-  let { map, assertAstIsEqual } = generate(src, true);
+  const { map, assertAstIsEqual } = generate(src, true);
 
   assertAstIsEqual();
   expect(map.mappings).toBe("CAAA,EAAE,EAAE");

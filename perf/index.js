@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const fs = require("fs");
 
 const babylon = require("babylon");
@@ -55,7 +57,8 @@ const loop = (fn, iterations) => {
   }
 };
 
-const executeRun = (iterations) => {
+// eslint-disable-next-line max-statements
+const executeRun = iterations => {
   console.log(`===== ${t(`${iterations} iterations`).color(t.yellow)} =====\n`);
 
   process.stdout.write("  babel-generator: ");
@@ -79,7 +82,6 @@ const executeRun = (iterations) => {
 
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 
 console.log("\nWarming up the JIT...");

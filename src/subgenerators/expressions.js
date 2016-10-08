@@ -38,10 +38,10 @@ exports.UnaryExpression = (node, generator) => {
   generator.advance(node.operator);
 
   switch (node.operator) {
-    case "typeof":
-    case "void":
-    case "delete":
-      generator.advance(" ");
+  case "typeof":
+  case "void":
+  case "delete":
+    generator.advance(" ");
   }
 
   if (node.extra.parenthesizedArgument) { generator.advance("("); }
@@ -56,12 +56,12 @@ exports.BinaryExpression = (node, generator) => {
   generator.generate(node.left);
 
   switch (node.operator) {
-    case "in":
-    case "instanceof":
-      generator.advance(` ${node.operator} `);
-      break;
-    default:
-      generator.advance(node.operator);
+  case "in":
+  case "instanceof":
+    generator.advance(` ${node.operator} `);
+    break;
+  default:
+    generator.advance(node.operator);
   }
 
   generator.generate(node.right);

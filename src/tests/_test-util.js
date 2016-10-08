@@ -1,5 +1,4 @@
 const babylon = require("babylon");
-const sourceMap = require("source-map");
 
 const { Generator } = require("..");
 
@@ -28,7 +27,7 @@ exports.generate = (source, singleExpression = false) => {
       ]
     });
     return singleExpression ? rootAst.program.body[0].expression : rootAst;
-  }
+  };
 
   const ast = getAst(source);
 
@@ -49,7 +48,7 @@ exports.generate = (source, singleExpression = false) => {
     map: JSON.parse(map),
     code,
     ast,
-    assertAstIsEqual 
+    assertAstIsEqual
   };
 };
 

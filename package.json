@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
-  "author": "\"Dale Bustad\" <\"dale@divmain.com\">",
+  "author": "Dale Bustad <dale@divmain.com>",
   "license": "MIT",
   "files": [
     "lib"

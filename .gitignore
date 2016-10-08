@@ -5,3 +5,5 @@ native/index.node
 **/.DS_Store
 
 /native/Cargo.lock
+
+/lib/

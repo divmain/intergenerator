@@ -3,7 +3,8 @@ exports.TryStatement = (node, generator) => {
   generator.advance("try");
   // node.block will always be a BlockStatement
   generator.generate(node.block);
-  generator.generate(node.handler);
+  node.handler && generator.generate(node.handler);
+  node.finalizer && generator.generate(node.finalizer);
 };
 
 // catch (param) body

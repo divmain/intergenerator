@@ -24,6 +24,4 @@ exports.ReturnStatement = (node, anscestors, generator) => {
 };
 
 // ;
-exports.EmptyStatement = (node, anscestors, generator) => {
-  generator.advance(";");
-};
+exports.EmptyStatement = () => {};

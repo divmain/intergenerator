@@ -20,4 +20,5 @@ exports.CatchClause = (node, anscestors, generator) => {
 exports.ThrowStatement = (node, anscestors, generator) => {
   generator.advance("throw ");
   generator.generate(node.argument, anscestors);
+  generator.advance(";");
 };

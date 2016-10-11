@@ -44,9 +44,9 @@ exports.UnaryExpression = (node, generator) => {
     generator.advance(" ");
   }
 
-  if (node.extra.parenthesizedArgument) { generator.advance("("); }
+  if (node.extra && node.extra.parenthesizedArgument) { generator.advance("("); }
   generator.generate(node.argument);
-  if (node.extra.parenthesizedArgument) { generator.advance(")"); }
+  if (node.extra && node.extra.parenthesizedArgument) { generator.advance(")"); }
 };
 
 // left === right

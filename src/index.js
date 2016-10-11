@@ -2,6 +2,20 @@ const { SourceMapGenerator } = require("source-map");
 
 
 const subgenerators = require("./subgenerators");
+const parenPredicates = require("./paren-predicates");
+
+
+const getAnscestors = function* (parent, anscestors) {
+  yield parent;
+
+  if (!anscestors) { return; }
+
+  let anscestor;
+  // eslint-disable-next-line no-cond-assign
+  while (anscestor = anscestors.next()) {
+    yield anscestor;
+  }
+};
 
 
 exports.Generator = class Generator {
@@ -39,15 +53,20 @@ exports.Generator = class Generator {
     this._map.setSourceContent(filename, fileContent);
   }
 
-  generate (node) {
+  generate (node, anscestors) {
     const subgenerator = subgenerators[node.type];
     if (!subgenerator) {
       throw new Error(`Unknown node type detected: "${node.type}"`);
     }
 
-    if (node.extra && node.extra.parenthesized) { this.advance("("); }
-    subgenerator(node, this);
-    if (node.extra && node.extra.parenthesized) { this.advance(")"); }
+    const parenPredicate = parenPredicates[node.type];
+    const shouldParenthesize = node.extra ?
+      node.extra.parenthesized :
+      parenPredicate && parenPredicate(node, anscestors);
+
+    if (shouldParenthesize) { this.advance("("); }
+    subgenerator(node, getAnscestors(node, anscestors), this);
+    if (shouldParenthesize) { this.advance(")"); }
   }
 
   advance (codeSegment, loc, multiline = false) {

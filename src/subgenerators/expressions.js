@@ -1,40 +1,40 @@
 // callee(...arguments)
-exports.CallExpression = (node, generator) => {
-  generator.generate(node.callee);
+exports.CallExpression = (node, anscestors, generator) => {
+  generator.generate(node.callee, anscestors);
   generator.advance("(");
 
   node.arguments.forEach((argumentNode, idx) => {
     if (idx !== 0) { generator.advance(","); }
-    generator.generate(argumentNode);
+    generator.generate(argumentNode, anscestors);
   });
 
   generator.advance(")");
 };
 
 // object.property
-exports.MemberExpression = (node, generator) => {
-  generator.generate(node.object);
+exports.MemberExpression = (node, anscestors, generator) => {
+  generator.generate(node.object, anscestors);
   if (node.computed) {
     generator.advance("[");
-    generator.generate(node.property);
+    generator.generate(node.property, anscestors);
     generator.advance("]");
   } else {
     generator.advance(".");
-    generator.generate(node.property);
+    generator.generate(node.property, anscestors);
   }
 };
 
 // a,b,c
-exports.SequenceExpression = (node, generator) => {
+exports.SequenceExpression = (node, anscestors, generator) => {
   node.expressions.forEach((expressionNode, idx) => {
     if (idx !== 0) { generator.advance(","); }
-    generator.generate(expressionNode);
+    generator.generate(expressionNode, anscestors);
   });
 };
 
 // +argument (operator followed by argument)
 // - | + | ! | ~ | typeof | void | delete
-exports.UnaryExpression = (node, generator) => {
+exports.UnaryExpression = (node, anscestors, generator) => {
   generator.advance(node.operator);
 
   switch (node.operator) {
@@ -45,15 +45,15 @@ exports.UnaryExpression = (node, generator) => {
   }
 
   if (node.extra && node.extra.parenthesizedArgument) { generator.advance("("); }
-  generator.generate(node.argument);
+  generator.generate(node.argument, anscestors);
   if (node.extra && node.extra.parenthesizedArgument) { generator.advance(")"); }
 };
 
 // left === right
 // == | != | === | !== | < | <= | > | >= | << | >> | >>>
 // | + | - | * | / | % | | | ^ | & | in | instanceof
-exports.BinaryExpression = (node, generator) => {
-  generator.generate(node.left);
+exports.BinaryExpression = (node, anscestors, generator) => {
+  generator.generate(node.left, anscestors);
 
   switch (node.operator) {
   case "in":
@@ -64,40 +64,40 @@ exports.BinaryExpression = (node, generator) => {
     generator.advance(node.operator);
   }
 
-  generator.generate(node.right);
+  generator.generate(node.right, anscestors);
 };
 
 // argument++
 // ++ | --
-exports.UpdateExpression = (node, generator) => {
+exports.UpdateExpression = (node, anscestors, generator) => {
   if (node.prefix) { generator.advance(node.operator); }
-  generator.generate(node.argument);
+  generator.generate(node.argument, anscestors);
   if (!node.prefix) { generator.advance(node.operator); }
 };
 
 // left || right
 // && | ||
-exports.LogicalExpression = (node, generator) => {
-  generator.generate(node.left);
+exports.LogicalExpression = (node, anscestors, generator) => {
+  generator.generate(node.left, anscestors);
   generator.advance(node.operator);
-  generator.generate(node.right);
+  generator.generate(node.right, anscestors);
 };
 
 // left = right
-exports.AssignmentExpression = (node, generator) => {
-  generator.generate(node.left);
+exports.AssignmentExpression = (node, anscestors, generator) => {
+  generator.generate(node.left, anscestors);
   generator.advance("=");
-  generator.generate(node.right);
+  generator.generate(node.right, anscestors);
 };
 
 // new callee( ...arguments )
-exports.NewExpression = (node, generator) => {
+exports.NewExpression = (node, anscestors, generator) => {
   generator.advance("new ");
-  generator.generate(node.callee);
+  generator.generate(node.callee, anscestors);
   generator.advance("(");
   node.arguments.forEach((argumentNode, idx) => {
     if (idx !== 0) { generator.advance(","); }
-    generator.generate(argumentNode);
+    generator.generate(argumentNode, anscestors);
   });
   generator.advance(")");
 };

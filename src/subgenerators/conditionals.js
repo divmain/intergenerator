@@ -1,44 +1,44 @@
 // if (test) consequent else alternate
-exports.IfStatement = (node, generator) => {
+exports.IfStatement = (node, anscestors, generator) => {
   generator.advance("if(");
-  generator.generate(node.test);
+  generator.generate(node.test, anscestors);
   generator.advance(")");
-  generator.generate(node.consequent);
+  generator.generate(node.consequent, anscestors);
 
   if (node.alternate) {
     generator.advance("else");
-    generator.generate(node.alternate);
+    generator.generate(node.alternate, anscestors);
   }
 };
 
 // condition ? a : b
-exports.ConditionalExpression = (node, generator) => {
-  generator.generate(node.test);
+exports.ConditionalExpression = (node, anscestors, generator) => {
+  generator.generate(node.test, anscestors);
   generator.advance("?");
-  generator.generate(node.consequent);
+  generator.generate(node.consequent, anscestors);
   generator.advance(":");
-  generator.generate(node.alternate);
+  generator.generate(node.alternate, anscestors);
 };
 
 // switch (condition) { ...cases } ;
-exports.SwitchStatement = (node, generator) => {
+exports.SwitchStatement = (node, anscestors, generator) => {
   generator.advance("switch(");
-  generator.generate(node.discriminant);
+  generator.generate(node.discriminant, anscestors);
   generator.advance("){");
 
 
   node.cases.forEach(caseNode => {
-    generator.generate(caseNode);
+    generator.generate(caseNode, anscestors);
   });
 
   generator.advance("}");
 };
 
 // case: A
-exports.SwitchCase = (node, generator) => {
+exports.SwitchCase = (node, anscestors, generator) => {
   if (node.test) {
     generator.advance("case ");
-    generator.generate(node.test);
+    generator.generate(node.test, anscestors);
   } else {
     generator.advance("default");
   }
@@ -54,6 +54,6 @@ exports.SwitchCase = (node, generator) => {
   // However, this also means we'll have unnecessary semicolons
   // following the last consequent of each SwitchCase.
   node.consequent.forEach(consequentNode => {
-    generator.generate(consequentNode);
+    generator.generate(consequentNode, anscestors);
   });
 };

@@ -15,6 +15,9 @@ exports.ExpressionStatement = (node, generator) => {
 
 // return argument;
 exports.ReturnStatement = (node, generator) => {
+  if (!node.argument) {
+    return generator.advance("return;");
+  }
   generator.advance("return ");
   generator.generate(node.argument);
   generator.advance(";");

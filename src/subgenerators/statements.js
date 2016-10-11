@@ -14,6 +14,7 @@ exports.ExpressionStatement = (node, anscestors, generator) => {
 };
 
 // return argument;
+// eslint-disable-next-line consistent-return
 exports.ReturnStatement = (node, anscestors, generator) => {
   if (!node.argument) {
     return generator.advance("return;");

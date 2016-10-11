@@ -14,13 +14,13 @@ exports.CallExpression = (node, generator) => {
 // object.property
 exports.MemberExpression = (node, generator) => {
   generator.generate(node.object);
-  if (node.property.type === "Identifier") {
-    generator.advance(".");
-    generator.generate(node.property);
-  } else {
+  if (node.computed) {
     generator.advance("[");
     generator.generate(node.property);
     generator.advance("]");
+  } else {
+    generator.advance(".");
+    generator.generate(node.property);
   }
 };
 

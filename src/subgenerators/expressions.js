@@ -86,7 +86,7 @@ exports.LogicalExpression = (node, anscestors, generator) => {
 // left = right
 exports.AssignmentExpression = (node, anscestors, generator) => {
   generator.generate(node.left, anscestors);
-  generator.advance("=");
+  generator.advance(node.operator);
   generator.generate(node.right, anscestors);
 };
 

@@ -5,17 +5,7 @@ const subgenerators = require("./subgenerators");
 const parenPredicates = require("./paren-predicates");
 
 
-const getAnscestors = function* (parent, anscestors) {
-  yield parent;
-
-  if (!anscestors) { return; }
-
-  let anscestor;
-  // eslint-disable-next-line no-cond-assign
-  while (anscestor = anscestors.next()) {
-    yield anscestor;
-  }
-};
+const getAnscestors = (parent, anscestors) => [parent].concat(anscestors);
 
 
 exports.Generator = class Generator {

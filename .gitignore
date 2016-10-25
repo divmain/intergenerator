@@ -7,3 +7,5 @@ native/index.node
 /native/Cargo.lock
 
 /lib/
+
+/yarn.lock

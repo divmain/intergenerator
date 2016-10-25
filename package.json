@@ -1,7 +1,7 @@
 {
   "name": "intergenerator",
   "version": "0.2.0",
-  "description": "",
+  "description": "Code and source-map generator for Babel AST.",
   "main": "lib/index.js",
   "author": "Dale Bustad <dale@divmain.com>",
   "license": "MIT",

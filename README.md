@@ -1,6 +1,6 @@
 ## intergenerator
 
-`intergenerator` is a code and source-map generator for Babel AST.  For specifically, in _only_ generates minified code.  This, along with a handful of other trade-offs, has allowed for improved performance characteristics compared to `babel-generator` itself.
+`intergenerator` is a code and source-map generator for Babel AST.  Specifically, it _only_ generates minified code.  This, along with a handful of other trade-offs, has allowed for improved performance characteristics compared to `babel-generator` itself.
 
 At present, this library only supports ES5 code.  An error will be thrown if any unexpected node types are encountered.
 

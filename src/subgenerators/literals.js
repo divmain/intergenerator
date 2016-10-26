@@ -1,6 +1,12 @@
 exports.StringLiteral = (node, nodePath, generator) => {
-  // Use JSON.stringify to properly escape the string literal.
-  const code = JSON.stringify(node.value);
+  const extra = node.extra;
+
+  const code = extra && extra.raw !== null && node.value === extra.rawValue ?
+    // If nodes already include necessary meta-data to avoid rendering, use that.
+    extra.raw :
+    // Otherwise, use JSON.stringify to properly escape the string literal.
+    JSON.stringify(node.value);
+
   generator.advance(code, node.loc);
 };
 

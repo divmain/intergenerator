@@ -38,6 +38,39 @@ const { code, map } = g;
 **Note:** Performance is roughly 3x slower at present with source-map generation enabled.
 
 
+## Performance
+
+At present, `intergenerator` is roughly 2.7x faster than `babel-generator`.  You can run the benchmarks yourself by cloning the repo and running `node ./perf`.  You should see something like this:
+
+```
+Warming up the JIT...
+File: /path/to/intergenerator/node_modules/lodash/lodash.min.js
+
+Running performance tests...
+
+===== 10 iterations =====
+
+  babel-generator: 647 milliseconds
+  intergenerator: 224 milliseconds (2.88x faster)
+
+===== 50 iterations =====
+
+  babel-generator: 2867 milliseconds
+  intergenerator: 1094 milliseconds (2.62x faster)
+
+===== 200 iterations =====
+
+  babel-generator: 11335 milliseconds
+  intergenerator: 4174 milliseconds (2.71x faster)
+
+===== 500 iterations =====
+
+  babel-generator: 28381 milliseconds
+  intergenerator: 10108 milliseconds (2.8x faster)
+
+```
+
+
 ## License
 
 [MIT License](http://opensource.org/licenses/MIT)

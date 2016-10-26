@@ -7,6 +7,21 @@ exports.VariableDeclaration = (node, nodePath, generator) => {
     generator.generate(declaration, nodePath);
   });
 
+  const parentNode = nodePath.parent.node;
+  const parentNodeType = parentNode.type;
+
+  if (
+    // `for (var x in a) {}`       There should be no semicolon following `x`.
+    parentNodeType === "ForInStatement" ||
+    // `for (var i = 1; i++;) {}`  The semicolon will be inserted by the ForStatement
+    //                             generator.
+    parentNodeType === "ForStatement"
+  ) {
+    // The above semicolon exclusions are only true if the variable declaration falls
+    // within the parenthesis, not if it is the statement's body.
+    if (parentNode.body !== node) { return; }
+  }
+
   generator.advance(";");
 };
 

@@ -21,7 +21,6 @@ const babelRun = () => {
   const { code, map } = babelGenerator(ast, {
     comments: false,
     compact: true,
-    // minified: true
     quotes: "double",
     sourceMaps: true,
     sourceMapTarget: "lodash.bundle.js",

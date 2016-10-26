@@ -87,9 +87,13 @@ exports.BinaryExpression = (node, parentNodePath) => {
   const parentType = parent.type;
 
   if (node.operator === "in") {
-    // let i = (1 in []);
-    if (parentType === "isVariableDeclarator") { return true; }
-    if (parentType === "ForStatement") { return true; }
+    if (
+      // let i = (1 in []);
+      parentType === "isVariableDeclarator" ||
+      parentType === "ForStatement"
+    ) {
+      return true;
+  }
   }
 
   return unaryOrBinary(node, parent);

@@ -6,7 +6,7 @@ exports.IfStatement = (node, nodePath, generator) => {
   generator.generate(node.consequent, nodePath);
 
   if (node.alternate) {
-    generator.advance("else");
+    generator.advance(node.alternate.type === "BlockStatement" ? "else" : "else ");
     generator.generate(node.alternate, nodePath);
   }
 };

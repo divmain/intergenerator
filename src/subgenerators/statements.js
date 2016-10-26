@@ -25,4 +25,6 @@ exports.ReturnStatement = (node, nodePath, generator) => {
 };
 
 // ;
-exports.EmptyStatement = () => {};
+exports.EmptyStatement = (node, nodePath, generator) => {
+  generator.advance(";");
+};

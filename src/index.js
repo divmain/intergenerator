@@ -14,7 +14,7 @@ const getNodePath = (node, parentNodePath) => ({
 exports.Generator = class Generator {
   constructor (opts = {}) {
     const {
-      sourceRoot = "/",
+      sourceRoot,
       outputFilename,
       includeSourcemap = true
     } = opts;

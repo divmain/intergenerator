@@ -1,5 +1,5 @@
-exports.SequenceExpression = (node, anscestors) => {
-  const parent = anscestors[0];
+exports.SequenceExpression = (node, parentNodePath) => {
+  const parent = parentNodePath.node;
   const parentType = parent.type;
 
   if (
@@ -82,8 +82,8 @@ const unaryOrBinary = (node, parent) => {
   return false;
 };
 
-exports.BinaryExpression = (node, anscestors) => {
-  const parent = anscestors[0];
+exports.BinaryExpression = (node, parentNodePath) => {
+  const parent = parentNodePath.node;
   const parentType = parent.type;
 
   if (node.operator === "in") {
@@ -95,18 +95,18 @@ exports.BinaryExpression = (node, anscestors) => {
   return unaryOrBinary(node, parent);
 };
 
-exports.UnaryExpression = (node, anscestors) => {
-  const parent = anscestors[0];
+exports.UnaryExpression = (node, parentNodePath) => {
+  const parent = parentNodePath.node;
   return unaryOrBinary(node, parent);
 };
 
-exports.LogicalExpression = (node, anscestors) => {
-  const parent = anscestors[0];
+exports.LogicalExpression = (node, parentNodePath) => {
+  const parent = parentNodePath.node;
   return unaryOrBinary(node, parent);
 };
 
-exports.AssignmentExpression = (node, anscestors) => {
-  const parent = anscestors[0];
+exports.AssignmentExpression = (node, parentNodePath) => {
+  const parent = parentNodePath.node;
   const parentType = parent.type;
 
   if (

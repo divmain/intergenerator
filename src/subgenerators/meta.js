@@ -1,24 +1,24 @@
-exports.Program = (node, anscestors, generator) => {
+exports.Program = (node, nodePath, generator) => {
   if (node.directives && node.directives.length) {
     node.directives.forEach(directiveNode => {
-      generator.generate(directiveNode, anscestors);
+      generator.generate(directiveNode, nodePath);
     });
   }
 
   // Program nodes should not have their own mapping.
   node.body.forEach(bodyNode => {
-    generator.generate(bodyNode, anscestors);
+    generator.generate(bodyNode, nodePath);
   });
 };
 
-exports.Directive = (node, anscestors, generator) => {
-  generator.generate(node.value, anscestors);
+exports.Directive = (node, nodePath, generator) => {
+  generator.generate(node.value, nodePath);
 };
 
-exports.DirectiveLiteral = (node, anscestors, generator) => {
+exports.DirectiveLiteral = (node, nodePath, generator) => {
   generator.advance(`"${node.value}";`);
 };
 
-exports.File = (node, anscestors, generator) => {
-  generator.generate(node.program, anscestors);
+exports.File = (node, nodePath, generator) => {
+  generator.generate(node.program, nodePath);
 };

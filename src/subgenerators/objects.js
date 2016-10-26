@@ -1,16 +1,16 @@
 // { ...properties }
-exports.ObjectExpression = (node, anscestors, generator) => {
+exports.ObjectExpression = (node, nodePath, generator) => {
   generator.advance("{");
   node.properties.forEach((propertyNode, idx) => {
     if (idx !== 0) { generator.advance(","); }
-    generator.generate(propertyNode, anscestors);
+    generator.generate(propertyNode, nodePath);
   });
   generator.advance("}");
 };
 
 // key: value
-exports.ObjectProperty = (node, anscestors, generator) => {
-  generator.generate(node.key, anscestors);
+exports.ObjectProperty = (node, nodePath, generator) => {
+  generator.generate(node.key, nodePath);
   generator.advance(":");
-  generator.generate(node.value, anscestors);
+  generator.generate(node.value, nodePath);
 };

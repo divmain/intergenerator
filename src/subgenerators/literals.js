@@ -1,26 +1,26 @@
-exports.StringLiteral = (node, anscestors, generator) => {
+exports.StringLiteral = (node, nodePath, generator) => {
   // Use JSON.stringify to properly escape the string literal.
   const code = JSON.stringify(node.value);
   generator.advance(code, node.loc);
 };
 
-exports.NumericLiteral = (node, anscestors, generator) => {
+exports.NumericLiteral = (node, nodePath, generator) => {
   const code = node.value.toString();
   generator.advance(code, node.loc);
 };
 
-exports.NullLiteral = (node, anscestors, generator) => {
+exports.NullLiteral = (node, nodePath, generator) => {
   generator.advance("null");
 };
 
-exports.BooleanLiteral = (node, anscestors, generator) => {
+exports.BooleanLiteral = (node, nodePath, generator) => {
   generator.advance(node.value ? "true" : "false");
 };
 
-exports.ThisExpression = (node, anscestors, generator) => {
+exports.ThisExpression = (node, nodePath, generator) => {
   generator.advance("this");
 };
 
-exports.RegExpLiteral = (node, anscestors, generator) => {
+exports.RegExpLiteral = (node, nodePath, generator) => {
   generator.advance(`/${node.pattern}/${node.flags}`);
 };

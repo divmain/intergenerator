@@ -1,44 +1,44 @@
 // if (test) consequent else alternate
-exports.IfStatement = (node, anscestors, generator) => {
+exports.IfStatement = (node, nodePath, generator) => {
   generator.advance("if(");
-  generator.generate(node.test, anscestors);
+  generator.generate(node.test, nodePath);
   generator.advance(")");
-  generator.generate(node.consequent, anscestors);
+  generator.generate(node.consequent, nodePath);
 
   if (node.alternate) {
     generator.advance("else");
-    generator.generate(node.alternate, anscestors);
+    generator.generate(node.alternate, nodePath);
   }
 };
 
 // condition ? a : b
-exports.ConditionalExpression = (node, anscestors, generator) => {
-  generator.generate(node.test, anscestors);
+exports.ConditionalExpression = (node, nodePath, generator) => {
+  generator.generate(node.test, nodePath);
   generator.advance("?");
-  generator.generate(node.consequent, anscestors);
+  generator.generate(node.consequent, nodePath);
   generator.advance(":");
-  generator.generate(node.alternate, anscestors);
+  generator.generate(node.alternate, nodePath);
 };
 
 // switch (condition) { ...cases } ;
-exports.SwitchStatement = (node, anscestors, generator) => {
+exports.SwitchStatement = (node, nodePath, generator) => {
   generator.advance("switch(");
-  generator.generate(node.discriminant, anscestors);
+  generator.generate(node.discriminant, nodePath);
   generator.advance("){");
 
 
   node.cases.forEach(caseNode => {
-    generator.generate(caseNode, anscestors);
+    generator.generate(caseNode, nodePath);
   });
 
   generator.advance("}");
 };
 
 // case: A
-exports.SwitchCase = (node, anscestors, generator) => {
+exports.SwitchCase = (node, nodePath, generator) => {
   if (node.test) {
     generator.advance("case ");
-    generator.generate(node.test, anscestors);
+    generator.generate(node.test, nodePath);
   } else {
     generator.advance("default");
   }
@@ -54,6 +54,6 @@ exports.SwitchCase = (node, anscestors, generator) => {
   // However, this also means we'll have unnecessary semicolons
   // following the last consequent of each SwitchCase.
   node.consequent.forEach(consequentNode => {
-    generator.generate(consequentNode, anscestors);
+    generator.generate(consequentNode, nodePath);
   });
 };

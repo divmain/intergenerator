@@ -5,7 +5,10 @@ const subgenerators = require("./subgenerators");
 const parenPredicates = require("./paren-predicates");
 
 
-const getAnscestors = (parent, anscestors) => [parent].concat(anscestors);
+const getNodePath = (node, parentNodePath) => ({
+  node,
+  parent: parentNodePath
+});
 
 
 exports.Generator = class Generator {
@@ -43,7 +46,7 @@ exports.Generator = class Generator {
     this._map.setSourceContent(filename, fileContent);
   }
 
-  generate (node, anscestors) {
+  generate (node, parentNodePath) {
     const subgenerator = subgenerators[node.type];
     if (!subgenerator) {
       throw new Error(`Unknown node type detected: "${node.type}"`);
@@ -52,10 +55,10 @@ exports.Generator = class Generator {
     const parenPredicate = parenPredicates[node.type];
     const shouldParenthesize = node.extra ?
       node.extra.parenthesized :
-      parenPredicate && parenPredicate(node, anscestors);
+      parenPredicate && parenPredicate(node, parentNodePath);
 
     if (shouldParenthesize) { this.advance("("); }
-    subgenerator(node, getAnscestors(node, anscestors), this);
+    subgenerator(node, getNodePath(node, parentNodePath), this);
     if (shouldParenthesize) { this.advance(")"); }
   }
 

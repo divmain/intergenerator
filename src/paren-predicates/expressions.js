@@ -7,6 +7,7 @@ exports.SequenceExpression = (node, parentNodePath) => {
     parentType === "ExpressionStatement" ||
     parentType === "ReturnStatement" ||
     parentType === "ThrowStatement" ||
+    parentType === "ConditionalExpression" ||
     parentType === "SwitchStatement" && parent.discriminant === node ||
     parentType === "WhileStatement" && parent.test === node ||
     parentType === "IfStatement" && parent.test === node ||

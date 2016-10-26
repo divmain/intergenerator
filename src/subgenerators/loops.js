@@ -1,10 +1,15 @@
+const insertSemicolon = (childNode, generator) => {
+  if (childNode && childNode.type === "VariableDeclaration") { return; }
+  generator.advance(";");
+};
+
 // for (init; test; update) body
 exports.ForStatement = (node, nodePath, generator) => {
   generator.advance("for(");
   if (node.init) { generator.generate(node.init, nodePath); }
-  generator.advance(";");
+  insertSemicolon(node.init, generator);
   if (node.test) { generator.generate(node.test, nodePath); }
-  generator.advance(";");
+  insertSemicolon(node.test, generator);
   if (node.update) { generator.generate(node.update, nodePath); }
   generator.advance(")");
   generator.generate(node.body, nodePath);

@@ -26,7 +26,7 @@ exports.Generator = class Generator {
     }
 
     this.includeSourcemap = includeSourcemap;
-    this._map = includeSourcemap ?
+    this.sourceMapGenerator = includeSourcemap ?
       new SourceMapGenerator({
         file: outputFilename,
         sourceRoot
@@ -43,7 +43,7 @@ exports.Generator = class Generator {
     if (!this.includeSourcemap) {
       throw new Error("You cannot define source files when sourcemap output is disabled.");
     }
-    this._map.setSourceContent(filename, fileContent);
+    this.sourceMapGenerator.setSourceContent(filename, fileContent);
   }
 
   generate (node, parentNodePath) {
@@ -75,7 +75,7 @@ exports.Generator = class Generator {
   }
 
   _mark (loc) {
-    this._map.addMapping({
+    this.sourceMapGenerator.addMapping({
       source: loc.filename,
       original: loc.start,
       generated: {
@@ -91,6 +91,6 @@ exports.Generator = class Generator {
   }
 
   get map () {
-    return this.includeSourcemap ? this._map.toString() : null;
+    return this.includeSourcemap ? this.sourceMapGenerator.toString() : null;
   }
 };

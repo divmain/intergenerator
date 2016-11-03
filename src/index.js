@@ -1,6 +1,4 @@
-const { SourceMapGenerator } = require("source-map");
-
-
+const { SourceMapGenerator } = require("./source-map-generator");
 const subgenerators = require("./subgenerators");
 const parenPredicates = require("./paren-predicates");
 
@@ -27,15 +25,14 @@ exports.Generator = class Generator {
 
     this.includeSourcemap = includeSourcemap;
     this.sourceMapGenerator = includeSourcemap ?
-      new SourceMapGenerator({
-        file: outputFilename,
-        sourceRoot
-      }) :
+      new SourceMapGenerator() :
       null;
     this.mark = includeSourcemap ? this._mark : () => {};
 
-    this.row = 0;
+    // For sourcemaps, lines start at 1 and columns start at 0.
+    this.row = 1;
     this.column = 0;
+
     this.codeSegments = [];
   }
 
@@ -75,15 +72,14 @@ exports.Generator = class Generator {
   }
 
   _mark (loc) {
-    this.sourceMapGenerator.addMapping({
-      source: loc.filename,
-      original: loc.start,
-      generated: {
-        // With source-maps, lines and columns are one-indexed.
-        line: this.row + 1,
-        column: this.column + 1
-      }
-    });
+    this.sourceMapGenerator.addMapping(
+      loc.filename,
+      loc.start.line,
+      loc.start.column,
+      this.row,
+      this.column,
+      loc.identifierName
+    );
   }
 
   get code () {

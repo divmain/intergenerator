@@ -1,3 +1,5 @@
+// This appears to be redundant, but a object lookup call will perform better than
+// a character lookup in a string.
 const integerToChar = Array.prototype.reduce.call(
   "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
   (memo, char, idx) => {

@@ -1,6 +1,6 @@
 // function id (...params) { body }
 exports.FunctionDeclaration = (node, nodePath, generator) => {
-  generator.advance("function ");
+  generator.advance("function ", node.loc);
   generator.generate(node.id, nodePath);
   generator.advance("(");
 
@@ -15,7 +15,7 @@ exports.FunctionDeclaration = (node, nodePath, generator) => {
 
 // function id (...params) { body }
 exports.FunctionExpression = (node, nodePath, generator) => {
-  generator.advance("function");
+  generator.advance("function", node.loc);
 
   if (node.id) {
     generator.advance(" ");

@@ -1,5 +1,6 @@
 // callee(...arguments)
 exports.CallExpression = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.generate(node.callee, nodePath);
   generator.advance("(");
 
@@ -13,6 +14,7 @@ exports.CallExpression = (node, nodePath, generator) => {
 
 // object.property
 exports.MemberExpression = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.generate(node.object, nodePath);
   if (node.computed) {
     generator.advance("[");
@@ -26,6 +28,7 @@ exports.MemberExpression = (node, nodePath, generator) => {
 
 // a,b,c
 exports.SequenceExpression = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   node.expressions.forEach((expressionNode, idx) => {
     if (idx !== 0) { generator.advance(","); }
     generator.generate(expressionNode, nodePath);
@@ -35,6 +38,7 @@ exports.SequenceExpression = (node, nodePath, generator) => {
 // +argument (operator followed by argument)
 // - | + | ! | ~ | typeof | void | delete
 exports.UnaryExpression = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance(node.operator);
 
   switch (node.operator) {
@@ -53,6 +57,7 @@ exports.UnaryExpression = (node, nodePath, generator) => {
 // == | != | === | !== | < | <= | > | >= | << | >> | >>>
 // | + | - | * | / | % | | | ^ | & | in | instanceof
 exports.BinaryExpression = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.generate(node.left, nodePath);
 
   switch (node.operator) {
@@ -70,6 +75,7 @@ exports.BinaryExpression = (node, nodePath, generator) => {
 // argument++
 // ++ | --
 exports.UpdateExpression = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   if (node.prefix) { generator.advance(node.operator); }
   generator.generate(node.argument, nodePath);
   if (!node.prefix) { generator.advance(node.operator); }
@@ -78,6 +84,7 @@ exports.UpdateExpression = (node, nodePath, generator) => {
 // left || right
 // && | ||
 exports.LogicalExpression = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.generate(node.left, nodePath);
   generator.advance(node.operator);
   generator.generate(node.right, nodePath);
@@ -85,6 +92,7 @@ exports.LogicalExpression = (node, nodePath, generator) => {
 
 // left = right
 exports.AssignmentExpression = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.generate(node.left, nodePath);
   generator.advance(node.operator);
   generator.generate(node.right, nodePath);
@@ -92,6 +100,7 @@ exports.AssignmentExpression = (node, nodePath, generator) => {
 
 // new callee( ...arguments )
 exports.NewExpression = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance("new ");
   generator.generate(node.callee, nodePath);
   generator.advance("(");

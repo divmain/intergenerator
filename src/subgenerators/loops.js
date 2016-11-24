@@ -1,5 +1,6 @@
 // for (init; test; update) body
 exports.ForStatement = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance("for(");
   if (node.init) { generator.generate(node.init, nodePath); }
   generator.advance(";");
@@ -12,6 +13,7 @@ exports.ForStatement = (node, nodePath, generator) => {
 
 // for (left in right) body
 exports.ForInStatement = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance("for(");
   generator.generate(node.left, nodePath);
   generator.advance(" in ");
@@ -23,9 +25,11 @@ exports.ForInStatement = (node, nodePath, generator) => {
 
 // do body while (test)
 exports.DoWhileStatement = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance("do ");
   // node.body will always be a statement
   generator.generate(node.body, nodePath);
+  generator.mark(node.loc);
   generator.advance("while(");
   generator.generate(node.test, nodePath);
   generator.advance(")");
@@ -40,6 +44,7 @@ exports.LabeledStatement = (node, nodePath, generator) => {
 
 // continue label;
 exports.ContinueStatement = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance("continue");
   if (node.label) {
     generator.advance(" ");
@@ -50,6 +55,7 @@ exports.ContinueStatement = (node, nodePath, generator) => {
 
 // break label;
 exports.BreakStatement = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance("break");
   if (node.label) {
     generator.advance(" ");

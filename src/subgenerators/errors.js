@@ -1,5 +1,6 @@
 // try block handler
 exports.TryStatement = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance("try");
   // node.block will always be a BlockStatement
   generator.generate(node.block, nodePath);
@@ -12,6 +13,7 @@ exports.TryStatement = (node, nodePath, generator) => {
 
 // catch (param) body
 exports.CatchClause = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance("catch(");
   generator.generate(node.param, nodePath);
   generator.advance(")");
@@ -21,6 +23,7 @@ exports.CatchClause = (node, nodePath, generator) => {
 
 // throw expression
 exports.ThrowStatement = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance("throw ");
   generator.generate(node.argument, nodePath);
   generator.advance(";");

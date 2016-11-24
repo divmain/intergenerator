@@ -9,6 +9,7 @@ exports.BlockStatement = (node, nodePath, generator) => {
 
 // expression;
 exports.ExpressionStatement = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.generate(node.expression, nodePath);
   generator.advance(";");
 };
@@ -16,6 +17,7 @@ exports.ExpressionStatement = (node, nodePath, generator) => {
 // return argument;
 // eslint-disable-next-line consistent-return
 exports.ReturnStatement = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   if (!node.argument) {
     return generator.advance("return;");
   }

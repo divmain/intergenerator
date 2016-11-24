@@ -1,5 +1,6 @@
 // var ...declarations;
 exports.VariableDeclaration = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.advance(`${node.kind} `);
 
   node.declarations.forEach((declaration, idx) => {
@@ -27,6 +28,7 @@ exports.VariableDeclaration = (node, nodePath, generator) => {
 
 // id = init
 exports.VariableDeclarator = (node, nodePath, generator) => {
+  generator.mark(node.loc);
   generator.generate(node.id, nodePath);
   if (node.init) {
     generator.advance("=");

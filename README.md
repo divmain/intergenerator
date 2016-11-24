@@ -40,7 +40,7 @@ const { code, map } = g;
 
 ## Performance
 
-At present, `intergenerator` is roughly 2.7x faster than `babel-generator`.  You can run the benchmarks yourself by cloning the repo and running `node ./perf`.  You should see something like this:
+At present, `intergenerator` is roughly 2x faster than `babel-generator`.  You can run the benchmarks yourself by cloning the repo and running `node ./perf`.  You should see something like this:
 
 ```
 Warming up the JIT...
@@ -50,24 +50,23 @@ Running performance tests...
 
 ===== 10 iterations =====
 
-  babel-generator: 647 milliseconds
-  intergenerator: 224 milliseconds (2.88x faster)
+  babel-generator: 599 milliseconds
+  intergenerator: 299 milliseconds (2x faster)
 
 ===== 50 iterations =====
 
-  babel-generator: 2867 milliseconds
-  intergenerator: 1094 milliseconds (2.62x faster)
+  babel-generator: 2977 milliseconds
+  intergenerator: 1432 milliseconds (2.07x faster)
 
 ===== 200 iterations =====
 
-  babel-generator: 11335 milliseconds
-  intergenerator: 4174 milliseconds (2.71x faster)
+  babel-generator: 12022 milliseconds
+  intergenerator: 5418 milliseconds (2.21x faster)
 
 ===== 500 iterations =====
 
-  babel-generator: 28381 milliseconds
-  intergenerator: 10108 milliseconds (2.8x faster)
-
+  babel-generator: 29522 milliseconds
+  intergenerator: 13001 milliseconds (2.27x faster)
 ```
 
 
